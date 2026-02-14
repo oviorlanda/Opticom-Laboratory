@@ -147,7 +147,7 @@ const CONFIG = {
         },
         tatatertib: {
             id: 'tatatertib-section',
-            file: 'pages/tata tertib.html',
+            file: 'pages/tatatertib.html',
             title: 'Tata Tertib Praktikum'
         }
     },
@@ -229,4 +229,5 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = CONFIG;
 
 }
+
 
