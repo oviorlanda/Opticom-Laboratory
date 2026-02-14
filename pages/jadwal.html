@@ -1,0 +1,169 @@
+<!-- ============================================ -->
+<!-- JADWAL PRAKTIKUM PAGE -->
+<!-- Schedule information untuk praktikum -->
+<!-- ============================================ -->
+
+<!-- Page Header -->
+<div class="page-header">
+    <!-- Animated Background Shapes -->
+    <div class="hero-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+    </div>
+    
+    <div class="container">
+        <h2 class="section-title">Jadwal Praktikum</h2>
+        <div class="breadcrumb">
+            <a href="#" class="breadcrumb-link" data-page="about">Home</a> > Jadwal Praktikum
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main class="main-content">
+    <!-- Page Description -->
+    <p class="page-subtitle">
+        Jadwal praktikum Sistem Komunikasi Optik di Universitas Telkom. Pastikan Anda mengecek jadwal sebelum mengikuti praktikum.
+    </p>
+
+    <!-- Schedule Image Container -->
+    <div class="image-container">
+        <div class="image-wrapper">
+            <img 
+                src="assets/Jadwal.png" 
+                alt="Jadwal Praktikum Opticom Laboratory" 
+                class="jadwal-image"
+                onload="console.log('✅ Jadwal image loaded successfully!')"
+                onerror="console.error('❌ Failed to load:', this.src); this.onerror=null; this.src='./assets/Jadwal.png';">
+        </div>
+    </div>
+</main>
+
+<!-- Styles -->
+<style>
+/* ============================================ */
+/* MAIN LAYOUT */
+/* ============================================ */
+.main-content {
+    flex: 1;
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    width: 100%;
+}
+
+/* ============================================ */
+/* PAGE SUBTITLE */
+/* ============================================ */
+.page-subtitle {
+    font-size: 0.85rem;
+    color: #64748b;
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ============================================ */
+/* IMAGE CONTAINER - Blue Background */
+/* ============================================ */
+.image-container {
+    background: #0000FF;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 12px;
+}
+
+/* Image Wrapper - 16:9 Aspect Ratio */
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    background: white;
+    border-radius: 6px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Jadwal Image - Scrollable */
+.jadwal-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ============================================ */
+/* RESPONSIVE DESIGN */
+/* ============================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .main-content {
+        max-width: 100%;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 20px 15px;
+    }
+
+    .page-subtitle {
+        font-size: 0.8rem;
+    }
+
+    .image-container {
+        padding: 10px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .image-container {
+        padding: 8px;
+    }
+
+    .page-subtitle {
+        font-size: 0.75rem;
+    }
+}
+</style>
+
+<!-- JavaScript -->
+<script>
+console.log('📅 Jadwal Praktikum page loaded');
+
+// Initialize page on DOM ready
+document.addEventListener('DOMContentLoaded', function() {
+    initJadwalPage();
+});
+
+// Initialize jadwal page
+function initJadwalPage() {
+    const jadwalImage = document.querySelector('.jadwal-image');
+    
+    if (!jadwalImage) {
+        console.warn('Jadwal image not found');
+        return;
+    }
+    
+    // Check if image is already loaded
+    if (jadwalImage.complete) {
+        console.log('✅ Jadwal image already loaded');
+    }
+    
+    console.log('✅ Jadwal page initialized');
+}
+</script>

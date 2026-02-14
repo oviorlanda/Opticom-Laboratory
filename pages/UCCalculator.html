@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter (dBm ⇌ mW)</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: #f0f4ff; min-height: 100vh; }
+
+        .page-header {
+            background: linear-gradient(135deg, #0052CC 0%, #0099FF 100%);
+            padding: 50px 20px 70px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-shapes { position: absolute; inset: 0; pointer-events: none; }
+        .shape { position: absolute; border-radius: 50%; opacity: 0.12; }
+        .shape-1 { width: 250px; height: 250px; background: white; top: -60px; right: -40px; }
+        .shape-2 { width: 150px; height: 150px; background: white; bottom: -50px; left: 10%; }
+        .shape-3 { width: 80px; height: 80px; background: white; top: 20px; left: 30%; }
+        .shape-4 { width: 180px; height: 180px; background: white; bottom: -60px; right: 25%; }
+        .page-header .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+        .section-title { font-size: 30px; font-weight: 800; color: white; margin-bottom: 10px; letter-spacing: -0.5px; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.75); }
+        .breadcrumb-link { color: rgba(255,255,255,0.9); text-decoration: none; font-weight: 600; cursor: pointer; }
+        .breadcrumb-link:hover { color: white; text-decoration: underline; }
+
+        .uc-wrapper {
+            max-width: 520px;
+            margin: -25px auto 40px;
+            position: relative;
+            z-index: 2;
+            padding: 0 20px;
+        }
+
+        .uc-tab-container {
+            background: white;
+            border-radius: 40px;
+            padding: 4px;
+            display: flex;
+            gap: 4px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin: 0 auto 20px;
+        }
+
+        .uc-tab {
+            flex: 1;
+            padding: 10px 16px;
+            border: none;
+            background: transparent;
+            color: #666;
+            border-radius: 40px;
+            font-size: 0.82em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .uc-tab.active {
+            background: linear-gradient(135deg, #0066FF, #00AAFF);
+            color: white;
+            box-shadow: 0 2px 8px rgba(0,100,255,0.25);
+        }
+
+        .uc-card {
+            background: white;
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 6px 28px rgba(0,0,0,0.08);
+            border: 2px solid #f0f0f0;
+        }
+
+        .uc-mode { display: none; }
+        .uc-mode.active { display: block; }
+
+        .uc-formula-box {
+            background: #F0F5FF;
+            border: 1px solid #D0E2FF;
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-bottom: 18px;
+            font-size: 12px;
+            color: #444;
+            text-align: center;
+        }
+        .uc-formula-box .uc-formula {
+            font-weight: 700;
+            color: #0066FF;
+            font-size: 13px;
+        }
+
+        .uc-error {
+            background: #FFF0F0;
+            border: 1px solid #FFCCCC;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 12px;
+            color: #CC0000;
+            margin-bottom: 12px;
+            display: none;
+        }
+
+        .uc-input-group { margin-bottom: 16px; }
+        .uc-input-group label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+            font-size: 0.82em;
+        }
+        .uc-input-group label .uc-hint {
+            font-size: 0.9em;
+            color: #999;
+            font-weight: 400;
+            margin-left: 4px;
+        }
+        .uc-input-group input {
+            width: 100%;
+            padding: 11px 14px;
+            border: 2px solid #E8EFFE;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 700;
+            color: #0066FF;
+            background: #F8FAFF;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+        .uc-input-group input:focus { border-color: #0066FF; }
+
+        .uc-btn-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        .uc-btn-calc {
+            padding: 11px 18px;
+            background: linear-gradient(135deg, #0066FF, #00AAFF);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.9em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .uc-btn-calc:hover { transform: scale(1.02); box-shadow: 0 4px 14px rgba(0,102,255,0.3); }
+
+        .uc-btn-reset {
+            padding: 11px 18px;
+            background: #F5F5F5;
+            color: #666;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.9em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .uc-btn-reset:hover { background: #EBEBEB; }
+
+        .uc-results-box {
+            background: linear-gradient(135deg, #0066FF 0%, #00AAFF 100%);
+            border-radius: 12px;
+            padding: 18px;
+            color: white;
+        }
+        .uc-results-title {
+            font-size: 0.85em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+        }
+        .uc-result-item {
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+        }
+        .uc-result-label {
+            font-size: 0.7em;
+            margin-bottom: 4px;
+            opacity: 0.85;
+            color: white;
+        }
+        .uc-result-value {
+            font-size: 1.5em;
+            font-weight: 800;
+            color: white;
+        }
+
+        @media (max-width: 640px) {
+            .section-title { font-size: 24px; }
+            .uc-wrapper { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <div class="hero-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+    </div>
+    <div class="container">
+        <h2 class="section-title">Unit Converter (dBm ⇌ mW)</h2>
+        <div class="breadcrumb">
+            <a href="#" class="breadcrumb-link" data-page="Opticaltoolbox">Optical Toolbox</a> &rsaquo; Unit Converter
+        </div>
+    </div>
+</div>
+
+<div class="uc-wrapper">
+
+    <div class="uc-tab-container">
+        <button class="uc-tab active" id="uc-tab-dbm-to-mw" data-tab="dbm-to-mw">
+            <span>➡️</span>
+            <span>dBm → mW</span>
+        </button>
+        <button class="uc-tab" id="uc-tab-mw-to-dbm" data-tab="mw-to-dbm">
+            <span>⬅️</span>
+            <span>mW → dBm</span>
+        </button>
+    </div>
+
+    <div class="uc-card">
+
+        <!-- MODE 1: dBm → mW -->
+        <div class="uc-mode active" id="uc-mode-dbm-to-mw">
+
+            <div class="uc-formula-box">
+                💡 <span class="uc-formula">P(mW) = 10^(P(dBm)/10)</span>
+            </div>
+
+            <div class="uc-input-group">
+                <label>
+                    Power (dBm)
+                    <span class="uc-hint">decibel-milliwatts</span>
+                </label>
+                <input type="number" id="uc-dbm-input" value="10" step="0.1">
+            </div>
+
+            <div id="uc-error-dbm" class="uc-error"></div>
+
+            <div class="uc-btn-row">
+                <button class="uc-btn-calc" id="uc-btn-calc-dbm">Calculate</button>
+                <button class="uc-btn-reset" id="uc-btn-reset-dbm">Reset</button>
+            </div>
+
+            <div class="uc-results-box">
+                <div class="uc-results-title">📊 Result</div>
+                <div class="uc-result-item">
+                    <div class="uc-result-label">Power (mW)</div>
+                    <div class="uc-result-value" id="uc-mw-result">-</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODE 2: mW → dBm -->
+        <div class="uc-mode" id="uc-mode-mw-to-dbm">
+
+            <div class="uc-formula-box">
+                💡 <span class="uc-formula">P(dBm) = 10 × log₁₀(P(mW))</span>
+            </div>
+
+            <div class="uc-input-group">
+                <label>
+                    Power (mW)
+                    <span class="uc-hint">milliwatts</span>
+                </label>
+                <input type="number" id="uc-mw-input" value="10" step="0.001" min="0">
+            </div>
+
+            <div id="uc-error-mw" class="uc-error"></div>
+
+            <div class="uc-btn-row">
+                <button class="uc-btn-calc" id="uc-btn-calc-mw">Calculate</button>
+                <button class="uc-btn-reset" id="uc-btn-reset-mw">Reset</button>
+            </div>
+
+            <div class="uc-results-box">
+                <div class="uc-results-title">📊 Result</div>
+                <div class="uc-result-item">
+                    <div class="uc-result-label">Power (dBm)</div>
+                    <div class="uc-result-value" id="uc-dbm-result">-</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+const tabs = document.querySelectorAll('.uc-tab');
+const modes = document.querySelectorAll('.uc-mode');
+
+tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+        const target = tab.getAttribute('data-tab');
+        
+        tabs.forEach(function(t) {
+            t.classList.remove('active');
+        });
+        tab.classList.add('active');
+        
+        modes.forEach(function(m) {
+            m.classList.remove('active');
+        });
+        document.getElementById('uc-mode-' + target).classList.add('active');
+    });
+});
+
+// dBm → mW calculation
+document.getElementById('uc-btn-calc-dbm').addEventListener('click', function() {
+    const dBm = parseFloat(document.getElementById('uc-dbm-input').value);
+    
+    const errorBox = document.getElementById('uc-error-dbm');
+    errorBox.style.display = 'none';
+    
+    if (isNaN(dBm)) {
+        errorBox.textContent = '❌ Please enter a valid dBm value!';
+        errorBox.style.display = 'block';
+        return;
+    }
+    
+    const mW = Math.pow(10, dBm / 10);
+    
+    // Selalu tampilkan dalam mW, tanpa konversi ke unit lain
+    let mwValue = parseFloat(mW.toFixed(6)); // 6 desimal untuk presisi tinggi
+    document.getElementById('uc-mw-result').textContent = mwValue + ' mW';
+});
+
+document.getElementById('uc-btn-reset-dbm').addEventListener('click', function() {
+    document.getElementById('uc-dbm-input').value = '10';
+    document.getElementById('uc-error-dbm').style.display = 'none';
+    document.getElementById('uc-mw-result').textContent = '-';
+});
+
+// mW → dBm calculation (FIXED!)
+document.getElementById('uc-btn-calc-mw').addEventListener('click', function() {
+    const mW = parseFloat(document.getElementById('uc-mw-input').value);
+    
+    const errorBox = document.getElementById('uc-error-mw');
+    errorBox.style.display = 'none';
+    
+    if (isNaN(mW) || mW <= 0) {
+        errorBox.textContent = '❌ Please enter a valid mW value (must be > 0)!';
+        errorBox.style.display = 'block';
+        return;
+    }
+    
+    const dBm = 10 * Math.log10(mW);
+    
+    // PERBAIKAN: Format angka dengan benar
+    // Gunakan toFixed untuk desimal, tapi hilangkan trailing zeros
+    let formattedDbm = dBm.toFixed(2); // 2 desimal saja
+    formattedDbm = parseFloat(formattedDbm); // Hilangkan trailing zeros
+    
+    document.getElementById('uc-dbm-result').textContent = formattedDbm + ' dBm';
+});
+
+document.getElementById('uc-btn-reset-mw').addEventListener('click', function() {
+    document.getElementById('uc-mw-input').value = '10';
+    document.getElementById('uc-error-mw').style.display = 'none';
+    document.getElementById('uc-dbm-result').textContent = '-';
+});
+
+// Breadcrumb Navigation
+document.querySelector('[data-page="Opticaltoolbox"]')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.href = 'Opticaltoolbox.html';
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NA Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f0f4ff; min-height: 100vh; }
+
+        /* ── HEADER ─────────────────────────────── */
+        .page-header {
+            background: linear-gradient(135deg, #0052CC 0%, #0099FF 100%);
+            padding: 32px 20px 52px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-shapes { position: absolute; inset: 0; pointer-events: none; }
+        .shape { position: absolute; border-radius: 50%; opacity: 0.10; background: white; }
+        .shape-1 { width: 200px; height: 200px; top: -60px; right: -40px; }
+        .shape-2 { width: 120px; height: 120px; bottom: -40px; left: 8%; }
+        .shape-3 { width: 70px;  height: 70px;  top: 15px;  left: 28%; }
+        .page-header .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+        .section-title { font-size: 24px; font-weight: 800; color: white; margin-bottom: 6px; letter-spacing: -0.3px; }
+        .breadcrumb { font-size: 12px; color: rgba(255,255,255,0.70); }
+        .breadcrumb-link { color: rgba(255,255,255,0.9); text-decoration: none; font-weight: 600; cursor: pointer; }
+        .breadcrumb-link:hover { color: white; text-decoration: underline; }
+
+        /* ── WRAPPER ─────────────────────────────── */
+        .calc-wrapper {
+            max-width: 520px;
+            margin: -22px auto 30px;
+            position: relative;
+            z-index: 2;
+            padding: 0 16px;
+        }
+
+        /* ── TABS ────────────────────────────────── */
+        .tab-container {
+            background: white;
+            border-radius: 40px;
+            padding: 4px;
+            display: flex;
+            gap: 4px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.09);
+            margin: 0 auto 14px;
+        }
+        .calc-tab {
+            flex: 1;
+            padding: 8px 12px;
+            border: none;
+            background: transparent;
+            color: #777;
+            border-radius: 40px;
+            font-size: 0.78em;
+            font-weight: 700;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            white-space: nowrap;
+        }
+        .calc-tab.active {
+            background: linear-gradient(135deg, #0066FF, #00AAFF);
+            color: white;
+            box-shadow: 0 3px 10px rgba(0,100,255,0.3);
+        }
+        .tab-sym { font-style: italic; font-size: 1.15em; font-family: 'Times New Roman', serif; }
+
+        /* ── CARD ────────────────────────────────── */
+        .calc-card {
+            background: white;
+            border-radius: 16px;
+            padding: 18px 18px 16px;
+            box-shadow: 0 6px 28px rgba(0,0,0,0.08);
+            border: 1.5px solid #eef2ff;
+        }
+
+        .calc-mode { display: none; }
+        .calc-mode.active { display: block; }
+
+        /* ── FORMULA BAR ─────────────────────────── */
+        .formula-bar {
+            background: #F0F5FF;
+            border: 1px solid #D0E2FF;
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 14px;
+            font-size: 12px;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .formula-bar .fml { font-weight: 700; color: #0055EE; font-size: 13px; }
+
+        /* ── INPUT GROUP ─────────────────────────── */
+        .input-group { margin-bottom: 11px; }
+        .input-group label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 0.78em;
+        }
+        .input-group label .hint { font-size: 0.88em; color: #aaa; font-weight: 400; }
+        .input-group input {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1.5px solid #E0EAFF;
+            border-radius: 8px;
+            font-size: 0.92em;
+            font-weight: 700;
+            color: #0055EE;
+            background: #F8FAFF;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+        .input-group input:focus { border-color: #0066FF; background: white; }
+
+        /* ── UNIT ROW ────────────────────────────── */
+        .unit-row { display: flex; gap: 8px; align-items: stretch; }
+        .unit-row input { flex: 1; min-width: 0; }
+        .unit-select {
+            flex: 0 0 64px;
+            padding: 9px 8px;
+            border: 1.5px solid #E0EAFF;
+            border-radius: 8px;
+            font-size: 0.82em;
+            font-weight: 700;
+            color: #0055EE;
+            background: #F8FAFF;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            cursor: pointer;
+            outline: none;
+        }
+
+        /* ── ERROR ───────────────────────────────── */
+        .error-msg {
+            background: #FFF0F0;
+            border: 1px solid #FFCCCC;
+            border-radius: 8px;
+            padding: 7px 12px;
+            font-size: 12px;
+            color: #CC0000;
+            margin-bottom: 11px;
+            display: none;
+        }
+
+        /* ── BUTTONS ─────────────────────────────── */
+        .btn-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .btn-calc {
+            padding: 10px 16px;
+            background: linear-gradient(135deg, #0066FF, #00AAFF);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85em;
+            font-weight: 700;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-calc:hover { transform: scale(1.02); box-shadow: 0 4px 14px rgba(0,102,255,0.35); }
+        .btn-reset {
+            padding: 10px 16px;
+            background: #F2F2F2;
+            color: #666;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85em;
+            font-weight: 700;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-reset:hover { background: #E8E8E8; }
+
+        /* ── RESULTS ─────────────────────────────── */
+        .results-box {
+            background: linear-gradient(135deg, #0060F0 0%, #00A8FF 100%);
+            border-radius: 12px;
+            padding: 14px 14px 12px;
+        }
+        .results-title { font-size: 0.78em; font-weight: 700; color: rgba(255,255,255,0.85); margin-bottom: 10px; }
+        .results-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+        .result-item {
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 10px 8px;
+            text-align: center;
+            backdrop-filter: blur(4px);
+        }
+        .result-label { font-size: 0.68em; margin-bottom: 4px; opacity: 0.85; color: white; line-height: 1.3; }
+        .result-value { font-size: 1.25em; font-weight: 800; color: white; }
+
+        /* Use-NA button */
+        #btn-use-na-ref {
+            display: none;
+            width: 100%;
+            margin-top: 10px;
+            padding: 8px 14px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1.5px solid rgba(255,255,255,0.45);
+            border-radius: 8px;
+            font-size: 0.80em;
+            font-weight: 700;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        #btn-use-na-ref:hover { background: rgba(255,255,255,0.30); }
+    </style>
+</head>
+<body>
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="hero-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    <div class="container">
+        <h2 class="section-title">Numerical Aperture (NA)</h2>
+        <div class="breadcrumb">
+            <a href="javascript:void(0)" class="breadcrumb-link" data-page="Opticaltoolbox">Optical Toolbox</a> &rsaquo; NA Calculator
+        </div>
+    </div>
+</div>
+
+<!-- Calculator -->
+<div class="calc-wrapper">
+
+    <!-- Tabs -->
+    <div class="tab-container">
+        <button class="calc-tab active" id="tab-refractive" data-tab="refractive">
+            <span class="tab-sym">n</span> Refractive Index
+        </button>
+        <button class="calc-tab" id="tab-diameter" data-tab="diameter">
+            <span class="tab-sym">D</span> Diameter & Distance
+        </button>
+    </div>
+
+    <!-- Card -->
+    <div class="calc-card">
+
+        <!-- MODE 1: REFRACTIVE INDEX -->
+        <div class="calc-mode active" id="mode-refractive">
+            <div class="formula-bar">
+                💡 <span class="fml">NA = √(n₁² − n₂²)</span>
+            </div>
+
+            <div class="input-group">
+                <label>Core Refractive Index (n₁) <span class="hint">Typical: 1.45–1.50</span></label>
+                <input type="number" id="n1-input" placeholder="1.50" step="0.001" min="1" max="3" value="1.50">
+            </div>
+
+            <div class="input-group">
+                <label>Cladding Refractive Index (n₂) <span class="hint">Must be &lt; n₁</span></label>
+                <input type="number" id="n2-input" placeholder="1.48" step="0.001" min="1" max="3" value="1.48">
+            </div>
+
+            <div id="error-ref" class="error-msg"></div>
+
+            <div class="btn-row">
+                <button class="btn-calc" id="btn-calc-ref">Calculate</button>
+                <button class="btn-reset" id="btn-reset-ref">Reset</button>
+            </div>
+
+            <div class="results-box">
+                <div class="results-title">📊 Results</div>
+                <div class="results-grid">
+                    <div class="result-item">
+                        <div class="result-label">NA</div>
+                        <div class="result-value" id="na-ref">—</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Acceptance Angle (θ)</div>
+                        <div class="result-value" id="theta-ref">—</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Critical Angle (θc)</div>
+                        <div class="result-value" id="critical-ref">—</div>
+                    </div>
+                </div>
+                <button id="btn-use-na-ref">➡️ Gunakan NA ini di V-Number Calculator</button>
+            </div>
+        </div>
+
+        <!-- MODE 2: DIAMETER & DISTANCE -->
+        <div class="calc-mode" id="mode-diameter">
+            <div class="formula-bar">
+                💡 <span class="fml">NA = sin(arctan(D / 2L))</span>
+            </div>
+
+            <div class="input-group">
+                <label>Aperture Diameter (D) <span class="hint">Diameter bukaan</span></label>
+                <div class="unit-row">
+                    <input type="number" id="d-input" placeholder="25.4" step="0.1" min="0" value="25.4">
+                    <select class="unit-select" id="d-unit">
+                        <option value="mm">mm</option>
+                        <option value="cm">cm</option>
+                        <option value="m">m</option>
+                        <option value="in">in</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Distance from Source (L) <span class="hint">Jarak ke aperture</span></label>
+                <div class="unit-row">
+                    <input type="number" id="l-input" placeholder="100" step="0.1" min="0" value="100">
+                    <select class="unit-select" id="l-unit">
+                        <option value="mm">mm</option>
+                        <option value="cm">cm</option>
+                        <option value="m">m</option>
+                        <option value="in">in</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="error-dia" class="error-msg"></div>
+
+            <div class="btn-row">
+                <button class="btn-calc" id="btn-calc-dia">Calculate</button>
+                <button class="btn-reset" id="btn-reset-dia">Reset</button>
+            </div>
+
+            <div class="results-box">
+                <div class="results-title">📊 Results</div>
+                <div class="results-grid">
+                    <div class="result-item">
+                        <div class="result-label">NA</div>
+                        <div class="result-value" id="na-dia">—</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Half-Angle (θ)</div>
+                        <div class="result-value" id="theta-dia">—</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Full Angle (2θ)</div>
+                        <div class="result-value" id="fullangle-dia">—</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="calculator.js"></script>
+
+</body>
+</html>

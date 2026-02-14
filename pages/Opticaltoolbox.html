@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optical Toolbox</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: #f0f4ff; min-height: 100vh; }
+
+        .page-header {
+            background: linear-gradient(135deg, #0052CC 0%, #0099FF 100%);
+            padding: 50px 20px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-shapes { position: absolute; inset: 0; pointer-events: none; }
+        .shape { position: absolute; border-radius: 50%; opacity: 0.12; }
+        .shape-1 { width: 250px; height: 250px; background: white; top: -60px; right: -40px; }
+        .shape-2 { width: 150px; height: 150px; background: white; bottom: -50px; left: 10%; }
+        .shape-3 { width: 80px; height: 80px; background: white; top: 20px; left: 30%; }
+        .shape-4 { width: 180px; height: 180px; background: white; bottom: -60px; right: 25%; }
+        .page-header .container { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
+        .section-title { font-size: 32px; font-weight: 800; color: white; margin-bottom: 10px; letter-spacing: -0.5px; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.75); }
+        .breadcrumb-link { color: rgba(255,255,255,0.9); text-decoration: none; font-weight: 600; cursor: pointer; }
+        .breadcrumb-link:hover { color: white; text-decoration: underline; }
+
+        .toolbox-container { max-width: 900px; margin: -25px auto 0; padding: 30px 20px 50px; position: relative; z-index: 2; }
+        .toolbox-intro { text-align: center; margin-bottom: 35px; }
+        .toolbox-description { font-size: 14px; color: #555; line-height: 1.7; max-width: 650px; margin: 0 auto; }
+
+        .toolbox-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 18px; 
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .calculator-card {
+            background: white; 
+            border-radius: 16px; 
+            padding: 22px 18px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            position: relative;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
+            text-align: center;
+            min-height: 200px;
+            border: 1px solid #E8F0FF;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .calculator-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--card-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .calculator-card { 
+            box-shadow: 0 6px 25px rgba(0,82,204,0.08); 
+        }
+        .calculator-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 16px 40px rgba(0,82,204,0.16);
+            border-color: #B8D4FF;
+        }
+        .calculator-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon { 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            width: 58px; 
+            height: 58px; 
+            border-radius: 50%; 
+            margin-bottom: 16px; 
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .calculator-card:hover .card-icon {
+            transform: scale(1.1) translateY(-3px);
+        }
+        
+        .icon-blue-1 { 
+            background: linear-gradient(135deg, #0066FF 0%, #00AAFF 100%); 
+            box-shadow: 0 8px 20px rgba(0,102,255,0.3); 
+        }
+        .calculator-card:has(.icon-blue-1) {
+            --card-gradient: linear-gradient(90deg, #0066FF, #00AAFF);
+        }
+        
+        .icon-blue-2 { 
+            background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%); 
+            box-shadow: 0 8px 20px rgba(30,64,175,0.3); 
+        }
+        .calculator-card:has(.icon-blue-2) {
+            --card-gradient: linear-gradient(90deg, #1E40AF, #3B82F6);
+        }
+        
+        .icon-blue-3 { 
+            background: linear-gradient(135deg, #0284C7 0%, #06B6D4 100%); 
+            box-shadow: 0 8px 20px rgba(2,132,199,0.3); 
+        }
+        .calculator-card:has(.icon-blue-3) {
+            --card-gradient: linear-gradient(90deg, #0284C7, #06B6D4);
+        }
+        
+        .icon-blue-4 { 
+            background: linear-gradient(135deg, #0052CC 0%, #0099FF 100%); 
+            box-shadow: 0 8px 20px rgba(0,82,204,0.3); 
+        }
+        .calculator-card:has(.icon-blue-4) {
+            --card-gradient: linear-gradient(90deg, #0052CC, #0099FF);
+        }
+        
+        @keyframes soft-glow { 
+            0%, 100% { opacity: 0.3; filter: blur(18px); } 
+            50% { opacity: 0.5; filter: blur(22px); } 
+        }
+        
+        .icon-glow { 
+            position: absolute; 
+            width: 115%; 
+            height: 115%; 
+            border-radius: 50%; 
+            background: inherit;
+            opacity: 0.3;
+            animation: soft-glow 4s ease-in-out infinite; 
+            z-index: -1;
+        }
+
+        .card-title { 
+            font-size: 16px; 
+            font-weight: 800; 
+            color: #1a1a1a; 
+            margin-bottom: 18px; 
+            line-height: 1.3;
+            letter-spacing: -0.3px;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-open-calculator { 
+            width: 100%; 
+            padding: 9px 18px; 
+            background: var(--card-gradient, linear-gradient(135deg, #0066FF 0%, #00AAFF 100%)); 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            font-size: 12px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 6px; 
+            transition: all 0.35s ease; 
+            box-shadow: 0 5px 16px rgba(0,82,204,0.2); 
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-open-calculator::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-open-calculator:hover::before {
+            left: 100%;
+        }
+        
+        .btn-open-calculator:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 24px rgba(0,82,204,0.35); 
+        }
+
+        @media (max-width: 640px) {
+            .toolbox-grid { grid-template-columns: 1fr; gap: 16px; }
+            .calculator-card { min-height: auto; padding: 20px 16px; }
+            .section-title { font-size: 26px; }
+            .card-title { font-size: 15px; margin-bottom: 16px; }
+            .card-icon { width: 52px; height: 52px; margin-bottom: 14px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <div class="hero-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+    </div>
+    <div class="container">
+        <h2 class="section-title">Optical Toolbox</h2>
+        <div class="breadcrumb">
+            <a href="javascript:void(0)" class="breadcrumb-link" data-page="about">Home</a> &rsaquo; Optical Calculators
+        </div>
+    </div>
+</div>
+
+<div class="toolbox-container">
+    <div class="toolbox-intro">
+        <p class="toolbox-description">
+            Select a calculator below to perform precise optical calculations for your laboratory experiments and projects.
+        </p>
+    </div>
+
+    <div class="toolbox-grid">
+
+        <!-- CARD 1: NUMERICAL APERTURE -->
+        <div class="calculator-card" onclick="loadCalculator('NACalculator')">
+            <div class="card-icon icon-blue-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+                </svg>
+                <div class="icon-glow"></div>
+            </div>
+            <h3 class="card-title">Numerical Aperture (NA)</h3>
+            <button class="btn-open-calculator">
+                <span>Open Calculator</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- CARD 2: V-NUMBER & DISPERSION -->
+        <div class="calculator-card" onclick="loadCalculator('VDCalculator')">
+            <div class="card-icon icon-blue-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+                    <circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="22"/><path d="M12 12l7-7M12 12l-7 7"/>
+                </svg>
+                <div class="icon-glow"></div>
+            </div>
+            <h3 class="card-title">V-Number & Dispersion</h3>
+            <button class="btn-open-calculator">
+                <span>Open Calculator</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- CARD 3: LINK POWER BUDGET -->
+        <div class="calculator-card" onclick="loadCalculator('LPBCalculator')">
+            <div class="card-icon icon-blue-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                </svg>
+                <div class="icon-glow"></div>
+            </div>
+            <h3 class="card-title">Link Power Budget</h3>
+            <button class="btn-open-calculator">
+                <span>Open Calculator</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- CARD 4: UNIT CONVERTER -->
+        <div class="calculator-card" onclick="loadCalculator('UCCalculator')">
+            <div class="card-icon icon-blue-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+                    <path d="M7 16V4m0 0L3 8m4-4l4 4"/>
+                    <path d="M17 8v12m0 0l4-4m-4 4l-4-4"/>
+                </svg>
+                <div class="icon-glow"></div>
+            </div>
+            <h3 class="card-title">Unit Converter (dBm ⇌ mW)</h3>
+            <button class="btn-open-calculator">
+                <span>Open Calculator</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // ✅ FIXED: Kompatibel dengan index.html (showPage) DAN standalone (href)
+    function loadCalculator(name) {
+        // Mode index.html: gunakan showPage() jika tersedia
+        if (typeof window.showPage === 'function') {
+            window.showPage(name);
+            return;
+        }
+        // Mode standalone: fallback ke navigasi file langsung
+        const routes = {
+            'NACalculator':  'NACalculator.html',
+            'VDCalculator':  'VDCalculator.html',
+            'UCCalculator':  'UCCalculator.html',
+            'LPBCalculator': 'pages/LPBCalculator.html'
+        };
+        if (routes[name]) {
+            window.location.href = routes[name];
+        }
+    }
+</script>
+
+</body>
+</html>

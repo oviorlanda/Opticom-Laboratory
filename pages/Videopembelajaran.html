@@ -1,0 +1,1067 @@
+<!-- ============================================ -->
+<!-- VIDEO PEMBELAJARAN PAGE - CLEAN VERSION -->
+<!-- Removed: Progress, Difficulty badges, Duration, Overall Progress -->
+<!-- ============================================ -->
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="hero-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+    </div>
+    
+    <div class="container">
+        <h2 class="section-title">Video Pembelajaran</h2>
+        <div class="breadcrumb">
+            <a href="#" class="breadcrumb-link" data-page="about">Home</a> > Video Pembelajaran
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container" style="padding: 40px 20px;">
+    
+    <!-- Info Box with Stats -->
+    <div class="video-info-box-enhanced">
+        <div class="info-content">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                <div class="icon-pulse">
+                    <i class="fas fa-video"></i>
+                </div>
+                <p style="color: #1e40af; margin: 0; font-size: 1rem; line-height: 1.6;">
+                    Berikut adalah kumpulan video pembelajaran untuk tiap modul praktikum <strong>Fiber Optic Communication</strong>. Silakan pilih modul yang ingin dipelajari.
+                </p>
+            </div>
+            
+            <!-- Stats Row -->
+            <div class="stats-row">
+                <div class="stat-item">
+                    <i class="fas fa-play-circle"></i>
+                    <span><strong>3</strong> Video</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-book-open"></i>
+                    <span><strong>Materi Lengkap</strong></span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span><strong>Fiber Optic</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Section -->
+    <div class="video-container-wrapper">
+        <!-- Left: Video Player -->
+        <div class="video-player-section-enhanced">
+            <!-- Video Header -->
+            <div class="video-header">
+                <h3 class="video-current-title" id="current-video-title">
+                    <span class="title-icon">📹</span>
+                    Modul 1 - Fiber Optic Basics
+                </h3>
+            </div>
+            
+            <!-- Video Meta Info -->
+            <div class="video-meta">
+                <span class="meta-item">
+                    <i class="fas fa-eye"></i>
+                    <span id="video-views">1.2K views</span>
+                </span>
+                <span class="meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Updated 2024</span>
+                </span>
+            </div>
+            
+            <!-- YouTube Iframe -->
+            <div class="video-iframe-container-enhanced">
+                <iframe 
+                    id="video-iframe"
+                    src="https://www.youtube.com/embed/HY9podlmS1s" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="video-tabs">
+                <button class="tab-btn active" data-tab="description">
+                    <i class="fas fa-info-circle"></i> Deskripsi
+                </button>
+                <button class="tab-btn" data-tab="topics">
+                    <i class="fas fa-list"></i> Topik Bahasan
+                </button>
+                <button class="tab-btn" data-tab="notes">
+                    <i class="fas fa-bookmark"></i> Catatan
+                </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content-wrapper">
+                <!-- Description Tab -->
+                <div class="tab-content active" id="tab-description">
+                    <h4 class="content-title">
+                        <i class="fas fa-info-circle"></i> Deskripsi
+                    </h4>
+                    <p id="video-description" class="content-text">
+                        Video pembelajaran untuk modul Fiber Optic Basics yang mencakup konsep dasar serat optik, total internal reflection, numerical aperture, mode propagation, dispersion, dan attenuation. Materi ini penting untuk memahami prinsip-prinsip fundamental komunikasi optik.
+                    </p>
+                </div>
+
+                <!-- Topics Tab -->
+                <div class="tab-content" id="tab-topics">
+                    <h4 class="content-title">
+                        <i class="fas fa-list"></i> Topik Bahasan
+                    </h4>
+                    <ul class="topics-list" id="video-topics">
+                        <li><i class="fas fa-check-circle"></i> Total Internal Reflection (TIR)</li>
+                        <li><i class="fas fa-check-circle"></i> Numerical Aperture (NA)</li>
+                        <li><i class="fas fa-check-circle"></i> Mode Propagation</li>
+                        <li><i class="fas fa-check-circle"></i> Fiber Dispersion</li>
+                        <li><i class="fas fa-check-circle"></i> Attenuation & Loss</li>
+                    </ul>
+                </div>
+
+                <!-- Notes Tab -->
+                <div class="tab-content" id="tab-notes">
+                    <h4 class="content-title">
+                        <i class="fas fa-bookmark"></i> Catatan Penting
+                    </h4>
+                    <div class="notes-box" id="video-notes">
+                        <p><strong>⚠️ Perhatian:</strong></p>
+                        <p>• Pastikan memahami konsep TIR sebelum lanjut ke materi berikutnya</p>
+                        <p>• Numerical Aperture sangat penting untuk perhitungan praktikum</p>
+                        <p>• Download modul PDF untuk referensi lengkap</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons-enhanced">
+                <button class="btn-action-enhanced btn-primary" id="btn-download-modul">
+                    <i class="fas fa-download"></i>
+                    <span>Download Modul PDF</span>
+                </button>
+                <button class="btn-action-enhanced btn-secondary" onclick="if(typeof showPage === 'function') showPage('modules'); else alert('Fitur navigasi akan segera tersedia');">
+                    <i class="fas fa-book"></i>
+                    <span>Semua Modul</span>
+                </button>
+                <button class="btn-action-enhanced btn-outline" id="btn-fullscreen">
+                    <i class="fas fa-expand"></i>
+                    <span>Fullscreen</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Right: Module List -->
+        <div class="module-list-sidebar-enhanced">
+            <div class="sidebar-header">
+                <h4 class="sidebar-title">
+                    <i class="fas fa-list"></i> Daftar Modul
+                </h4>
+                <span class="module-count">3 Video</span>
+            </div>
+            
+            <!-- Module 1 -->
+            <div class="module-item-enhanced active" data-video="HY9podlmS1s" data-module="1">
+                <div class="module-number">1</div>
+                <div class="module-icon-circle-enhanced">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <div class="module-info-enhanced">
+                    <h5 class="module-name-enhanced">Fiber Optic Basics</h5>
+                    <p class="module-desc-enhanced">TIR, Numerical Aperture, Mode Propagation</p>
+                </div>
+                <div class="module-status-enhanced">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+            </div>
+
+            <!-- Module 2 -->
+            <div class="module-item-enhanced" data-video="zKu5Sm9NfuI" data-module="2">
+                <div class="module-number">2</div>
+                <div class="module-icon-circle-enhanced">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="module-info-enhanced">
+                    <h5 class="module-name-enhanced">Optical Systems</h5>
+                    <p class="module-desc-enhanced">WDM, LED, Laser, Photodetectors</p>
+                </div>
+                <div class="module-status-enhanced">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+            </div>
+
+            <!-- Module 3 -->
+            <div class="module-item-enhanced" data-video="YSRyOwXrXOc" data-module="3">
+                <div class="module-number">3</div>
+                <div class="module-icon-circle-enhanced">
+                    <i class="fas fa-broadcast-tower"></i>
+                </div>
+                <div class="module-info-enhanced">
+                    <h5 class="module-name-enhanced">Advanced Topics</h5>
+                    <p class="module-desc-enhanced">FSO, VLC, V2V, Underwater VLC</p>
+                </div>
+                <div class="module-status-enhanced">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Enhanced Styles -->
+<style>
+/* Enhanced Info Box */
+.video-info-box-enhanced {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border-left: 5px solid #3b82f6;
+    padding: 24px 28px;
+    border-radius: 16px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.video-info-box-enhanced::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.info-content {
+    position: relative;
+    z-index: 1;
+}
+
+.icon-pulse {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 15px rgba(59, 130, 246, 0);
+    }
+}
+
+/* Stats Row */
+.stats-row {
+    display: flex;
+    gap: 24px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #1e40af;
+    font-size: 0.9rem;
+    background: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.stat-item i {
+    color: #3b82f6;
+}
+
+/* Video Container */
+.video-container-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* Enhanced Video Player Section */
+.video-player-section-enhanced {
+    background: white;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Video Header */
+.video-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.video-current-title {
+    color: #1e293b;
+    font-size: 1.85rem;
+    font-weight: 800;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.title-icon {
+    font-size: 2rem;
+}
+
+/* Video Meta */
+.video-meta {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.meta-item i {
+    color: #3b82f6;
+}
+
+/* Enhanced Video Iframe */
+.video-iframe-container-enhanced {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    margin-bottom: 24px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    border: 4px solid #f1f5f9;
+}
+
+.video-iframe-container-enhanced iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+}
+
+/* Tabs Navigation */
+.video-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    padding: 12px 20px;
+    color: #64748b;
+    font-weight: 600;
+    cursor: pointer !important;
+    transition: all 0.3s ease;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    pointer-events: auto !important;
+    z-index: 10 !important;
+}
+
+.tab-btn:hover {
+    background: #f8fafc;
+    color: #3b82f6;
+}
+
+.tab-btn.active {
+    color: #3b82f6;
+    background: #eff6ff;
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    border-radius: 2px 2px 0 0;
+}
+
+/* Tab Content */
+.tab-content-wrapper {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 20px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.content-title {
+    color: #1e293b;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.content-title i {
+    color: #3b82f6;
+}
+
+.content-text {
+    color: #475569;
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* Topics List */
+.topics-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.topics-list li {
+    padding: 12px 16px;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #334155;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.topics-list li:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+.topics-list li i {
+    color: #10b981;
+    font-size: 18px;
+}
+
+/* Notes Box */
+.notes-box {
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    padding: 16px 20px;
+    border-radius: 8px;
+}
+
+.notes-box p {
+    margin: 8px 0;
+    color: #78350f;
+}
+
+/* Enhanced Action Buttons */
+.action-buttons-enhanced {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-action-enhanced {
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer !important;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+    pointer-events: auto !important;
+    z-index: 10 !important;
+}
+
+.btn-action-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-action-enhanced:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: white;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+}
+
+.btn-outline {
+    background: white;
+    border: 2px solid #3b82f6;
+    color: #3b82f6;
+}
+
+.btn-outline:hover {
+    background: #eff6ff;
+    border-color: #2563eb;
+}
+
+/* Enhanced Module Sidebar */
+.module-list-sidebar-enhanced {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e2e8f0;
+    margin-bottom: 20px;
+}
+
+.sidebar-title {
+    color: #1e293b;
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar-title i {
+    color: #3b82f6;
+}
+
+.module-count {
+    background: #eff6ff;
+    color: #3b82f6;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+/* Enhanced Module Item - CRITICAL: Make clickable */
+.module-item-enhanced {
+    position: relative;
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 16px;
+    cursor: pointer !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    background: #f8fafc;
+    pointer-events: auto !important;
+    z-index: 10 !important;
+}
+
+/* Prevent children from blocking clicks */
+.module-item-enhanced * {
+    pointer-events: none !important;
+}
+
+.module-item-enhanced:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    background: white;
+}
+
+.module-item-enhanced.active {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border-color: #3b82f6;
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25);
+}
+
+/* Module Number Badge */
+.module-number {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Enhanced Module Icon */
+.module-icon-circle-enhanced {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.module-item-enhanced:hover .module-icon-circle-enhanced {
+    transform: rotateY(180deg) scale(1.1);
+}
+
+.module-item-enhanced.active .module-icon-circle-enhanced {
+    animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.module-icon-circle-enhanced i {
+    color: white;
+    font-size: 26px;
+}
+
+/* Enhanced Module Info */
+.module-info-enhanced {
+    text-align: center;
+}
+
+.module-name-enhanced {
+    color: #1e293b;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 8px 0;
+}
+
+.module-desc-enhanced {
+    color: #64748b;
+    font-size: 0.85rem;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Module Status */
+.module-status-enhanced {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+}
+
+.module-status-enhanced i {
+    color: #94a3b8;
+    font-size: 28px;
+    transition: all 0.3s ease;
+}
+
+.module-item-enhanced.active .module-status-enhanced i {
+    color: #3b82f6;
+    animation: pulse-play 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-play {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.15);
+    }
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .video-container-wrapper {
+        grid-template-columns: 1fr 360px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .video-container-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    .module-list-sidebar-enhanced {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .video-info-box-enhanced {
+        padding: 20px;
+    }
+    
+    .stats-row {
+        gap: 12px;
+    }
+    
+    .stat-item {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+    
+    .video-player-section-enhanced {
+        padding: 20px;
+    }
+    
+    .video-current-title {
+        font-size: 1.5rem;
+    }
+    
+    .video-tabs {
+        flex-wrap: wrap;
+    }
+    
+    .tab-btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .action-buttons-enhanced {
+        flex-direction: column;
+    }
+    
+    .btn-action-enhanced {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .module-item-enhanced {
+        padding: 16px;
+    }
+}
+</style>
+
+<!-- JavaScript - GLOBAL INIT FUNCTION -->
+<script>
+// ✅ EXPOSE GLOBAL INITIALIZATION FUNCTION
+window.initVideoPembelajaran = function() {
+    console.log('🎬 initVideoPembelajaran() called!');
+    
+    // Wait a bit to ensure DOM is ready
+    setTimeout(function() {
+        
+        // Video data (simplified - removed difficulty and duration)
+        const videoData = {
+            '1': {
+                title: 'Modul 1 - Fiber Optic Basics',
+                videoId: 'HY9podlmS1s',
+                description: 'Video pembelajaran untuk modul Fiber Optic Basics yang mencakup konsep dasar serat optik, total internal reflection, numerical aperture, mode propagation, dispersion, dan attenuation. Materi ini penting untuk memahami prinsip-prinsip fundamental komunikasi optik.',
+                views: '1.2K views',
+                topics: [
+                    'Total Internal Reflection (TIR)',
+                    'Numerical Aperture (NA)',
+                    'Mode Propagation',
+                    'Fiber Dispersion',
+                    'Attenuation & Loss'
+                ],
+                notes: [
+                    'Pastikan memahami konsep TIR sebelum lanjut ke materi berikutnya',
+                    'Numerical Aperture sangat penting untuk perhitungan praktikum',
+                    'Download modul PDF untuk referensi lengkap'
+                ]
+            },
+            '2': {
+                title: 'Modul 2 - Optical Systems',
+                videoId: 'zKu5Sm9NfuI',
+                description: 'Video pembelajaran mengenai sistem optik termasuk Wavelength Division Multiplexing (WDM), sumber cahaya optik (LED dan Laser), photodetectors, dan optical amplifiers (EDFA, SOA). Membahas bagaimana komponen-komponen ini bekerja dalam sistem komunikasi optik modern.',
+                views: '980 views',
+                topics: [
+                    'Wavelength Division Multiplexing (WDM)',
+                    'Optical Sources: LED vs Laser',
+                    'Photodetectors (PIN, APD)',
+                    'Optical Amplifiers (EDFA, SOA)',
+                    'System Design Considerations'
+                ],
+                notes: [
+                    'Fokus pada perbedaan karakteristik LED dan Laser',
+                    'WDM sangat penting untuk komunikasi modern',
+                    'Praktikkan perhitungan link budget'
+                ]
+            },
+            '3': {
+                title: 'Modul 3 - Advanced Topics',
+                videoId: 'YSRyOwXrXOc',
+                description: 'Video pembelajaran topik lanjutan meliputi Free Space Optics (FSO), Visible Light Communication (VLC), Vehicle-to-Vehicle (V2V) communication, Underwater VLC, Hybrid RF-VLC, dan Underground Mining VLC. Mempelajari aplikasi komunikasi optik terkini dalam berbagai skenario.',
+                views: '756 views',
+                topics: [
+                    'Free Space Optics (FSO)',
+                    'Visible Light Communication (VLC)',
+                    'Vehicle-to-Vehicle (V2V) Communication',
+                    'Underwater VLC Applications',
+                    'Hybrid RF-VLC Systems',
+                    'Underground Mining VLC'
+                ],
+                notes: [
+                    'FSO rentan terhadap kondisi atmosfer',
+                    'VLC memanfaatkan LED untuk komunikasi dan pencahayaan',
+                    'Aplikasi underwater memiliki tantangan atenuasi unik'
+                ]
+            }
+        };
+        
+        // Get elements
+        const moduleItems = document.querySelectorAll('.module-item-enhanced');
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const iframe = document.getElementById('video-iframe');
+        const downloadBtn = document.getElementById('btn-download-modul');
+        const fullscreenBtn = document.getElementById('btn-fullscreen');
+        
+        console.log('   Found:', moduleItems.length, 'modules,', tabBtns.length, 'tabs');
+        
+        if (moduleItems.length === 0) {
+            console.error('   ❌ No module items found!');
+            return;
+        }
+        
+        // ✅ CRITICAL: Remove old event listeners by cloning
+        moduleItems.forEach(function(item) {
+            const clone = item.cloneNode(true);
+            item.parentNode.replaceChild(clone, item);
+        });
+        
+        // Re-query fresh elements
+        const freshModules = document.querySelectorAll('.module-item-enhanced');
+        const freshTabs = document.querySelectorAll('.tab-btn');
+        
+        // Module click listeners
+        freshModules.forEach(function(item) {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                console.log('   🎬 Module clicked!');
+                
+                const moduleNum = this.getAttribute('data-module');
+                const data = videoData[moduleNum];
+                
+                if (!data) {
+                    console.error('   ❌ No data for module:', moduleNum);
+                    return;
+                }
+                
+                // Update active state
+                freshModules.forEach(function(m) {
+                    m.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Update video
+                if (iframe) {
+                    iframe.src = 'https://www.youtube.com/embed/' + data.videoId;
+                }
+                
+                // Update title
+                const titleEl = document.getElementById('current-video-title');
+                if (titleEl) {
+                    titleEl.innerHTML = '<span class="title-icon">📹</span>' + data.title;
+                }
+                
+                // Update description
+                const descEl = document.getElementById('video-description');
+                if (descEl) {
+                    descEl.textContent = data.description;
+                }
+                
+                // Update meta
+                const viewsEl = document.getElementById('video-views');
+                if (viewsEl) viewsEl.textContent = data.views;
+                
+                // Update topics
+                const topicsList = document.getElementById('video-topics');
+                if (topicsList) {
+                    topicsList.innerHTML = data.topics.map(function(topic) {
+                        return '<li><i class="fas fa-check-circle"></i> ' + topic + '</li>';
+                    }).join('');
+                }
+                
+                // Update notes
+                const notesList = document.getElementById('video-notes');
+                if (notesList) {
+                    notesList.innerHTML = '<p><strong>⚠️ Perhatian:</strong></p>' +
+                        data.notes.map(function(note) {
+                            return '<p>• ' + note + '</p>';
+                        }).join('');
+                }
+                
+                console.log('   ✅ Video updated to:', data.title);
+                
+                // Scroll on mobile
+                if (window.innerWidth <= 1024) {
+                    titleEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Tab click listeners
+        freshTabs.forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const targetTab = this.getAttribute('data-tab');
+                console.log('   🔄 Tab clicked:', targetTab);
+                
+                // Remove active
+                freshTabs.forEach(function(b) {
+                    b.classList.remove('active');
+                });
+                document.querySelectorAll('.tab-content').forEach(function(c) {
+                    c.classList.remove('active');
+                });
+                
+                // Add active
+                this.classList.add('active');
+                const tabContent = document.getElementById('tab-' + targetTab);
+                if (tabContent) {
+                    tabContent.classList.add('active');
+                }
+            });
+        });
+        
+        // Download button
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const activeModule = document.querySelector('.module-item-enhanced.active');
+                if (activeModule) {
+                    const moduleNum = activeModule.getAttribute('data-module');
+                    alert('Download Modul ' + moduleNum + ' PDF\n\nFitur download akan segera tersedia.');
+                }
+            });
+        }
+        
+        // Fullscreen button
+        if (fullscreenBtn) {
+            fullscreenBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const videoContainer = document.querySelector('.video-iframe-container-enhanced');
+                if (videoContainer) {
+                    if (videoContainer.requestFullscreen) {
+                        videoContainer.requestFullscreen();
+                    } else if (videoContainer.webkitRequestFullscreen) {
+                        videoContainer.webkitRequestFullscreen();
+                    } else if (videoContainer.msRequestFullscreen) {
+                        videoContainer.msRequestFullscreen();
+                    }
+                }
+            });
+        }
+        
+        console.log('   ✅ All event listeners attached successfully!');
+        
+    }, 100); // Small delay to ensure DOM is ready
+};
+
+// Auto-init if loaded standalone (not via index.html)
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        // Only auto-init if not part of main app
+        if (!document.getElementById('about-section')) {
+            window.initVideoPembelajaran();
+        }
+    });
+} else {
+    // Check if this is standalone
+    if (!document.getElementById('about-section')) {
+        setTimeout(window.initVideoPembelajaran, 50);
+    }
+}
+</script>

@@ -1,0 +1,635 @@
+/* ============================================
+   RESPONSIVE.CSS - Media Queries
+   Mobile, Tablet, Desktop breakpoints
+   ============================================ */
+
+/* ============================================
+   TABLET LANDSCAPE (Max-width: 1024px)
+   ============================================ */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 30px;
+    }
+    
+    .nav-menu {
+        gap: 25px;
+    }
+    
+    .nav-link {
+        font-size: 1em;
+    }
+    
+    .welcome-title {
+        font-size: 2.5em;
+    }
+    
+    .excellent-tag {
+        font-size: 1.8em;
+    }
+    
+    .lab-intro-content {
+        gap: 40px;
+    }
+    
+    .vm-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .activity-card-horizontal {
+        grid-template-columns: 350px 1fr;
+    }
+    
+    .contact-main-grid {
+        gap: 30px;
+    }
+}
+
+/* ============================================
+   TABLET PORTRAIT (Max-width: 768px)
+   ============================================ */
+@media (max-width: 768px) {
+    /* Navigation - Mobile Menu */
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: var(--white);
+        width: 100%;
+        text-align: center;
+        transition: left var(--transition-fast);
+        box-shadow: var(--shadow-md);
+        padding: 20px 0;
+        gap: 15px;
+        z-index: 999;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+    
+    /* Hero Section */
+    .welcome-title {
+        font-size: 2em;
+    }
+
+    .excellent-tag {
+        font-size: 1.5em;
+    }
+    
+    .welcome-desc {
+        font-size: 1em;
+    }
+    
+    /* Section Titles */
+    .section-title {
+        font-size: 2em;
+    }
+    
+    .section-subtitle {
+        font-size: 1.1em;
+    }
+    
+    /* Lab Intro */
+    .lab-intro-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    /* Vision & Mission */
+    .vm-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .vm-card {
+        padding: 40px 30px;
+    }
+    
+    .vm-title {
+        font-size: 2em;
+    }
+    
+    /* Module Cards */
+    .module-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    /* Activity Cards - Stack Vertically */
+    .activity-card-horizontal {
+        grid-template-columns: 1fr;
+    }
+    
+    .activity-image-horizontal {
+        min-height: 250px;
+    }
+
+    .activity-content-horizontal {
+        padding: 30px;
+    }
+    
+    .activity-content-horizontal h3 {
+        font-size: 1.8em;
+    }
+    
+    /* Module Detail */
+    .module-image-header {
+        height: 300px;
+    }
+    
+    .module-overlay h2 {
+        font-size: 2.5em;
+    }
+    
+    .module-content-box {
+        padding: 40px 25px;
+    }
+    
+    .module-description p {
+        font-size: 1.05em;
+        line-height: 1.8;
+    }
+    
+    .module-description p:first-child::first-letter {
+        font-size: 3em;
+    }
+    
+    /* Video Section */
+    .video-section-premium {
+        padding: 30px 20px;
+    }
+    
+    .video-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .video-icon-large {
+        width: 100px;
+        height: 100px;
+        font-size: 4em;
+    }
+    
+    .video-info h5 {
+        font-size: 1.6em;
+    }
+    
+    .btn-video-large {
+        width: 100%;
+        justify-content: center;
+        padding: 18px 40px;
+        font-size: 1.1em;
+    }
+    
+    /* Teams */
+    .teams-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 20px;
+    }
+    
+    .team-card {
+        padding: 25px 15px;
+    }
+    
+    .team-avatar {
+        width: 100px;
+        height: 100px;
+    }
+    
+    /* Contact Page */
+    .contact-main-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .contact-info-card {
+        padding: 30px;
+    }
+    
+    .map-container {
+        height: 300px;
+    }
+    
+    .contact-form-box-right {
+        padding: 30px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Social Media */
+    .social-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .social-btn {
+        width: 80%;
+        justify-content: center;
+    }
+    
+    /* Modules Page - Reset alternating layout */
+    #modules-section .activity-card-horizontal,
+    #modules-section .activity-card-horizontal:nth-child(even) {
+        grid-template-columns: 1fr;
+    }
+    
+    #modules-section .activity-card-horizontal:nth-child(even) .activity-content-horizontal,
+    #modules-section .activity-card-horizontal:nth-child(even) .activity-image-horizontal {
+        order: initial;
+    }
+}
+
+/* ============================================
+   MOBILE (Max-width: 480px)
+   ============================================ */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    /* Logo Section */
+    .logo-section {
+        gap: 10px;
+    }
+    
+    .nav-logo {
+        height: 50px;
+    }
+    
+    .logo h1 {
+        font-size: 1.2em;
+    }
+    
+    .tagline {
+        font-size: 0.7em;
+    }
+    
+    /* Hero Section */
+    .hero-welcome {
+        padding: 60px 15px;
+    }
+    
+    .welcome-title {
+        font-size: 1.8em;
+    }
+
+    .excellent-tag {
+        font-size: 1.3em;
+        flex-direction: column;
+    }
+    
+    .welcome-desc {
+        font-size: 0.95em;
+    }
+    
+    /* Shapes - Smaller on mobile */
+    .shape-1 {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .shape-2 {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .shape-3 {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .shape-4 {
+        width: 220px;
+        height: 220px;
+    }
+    
+    /* Section Titles */
+    .section-title {
+        font-size: 1.8em;
+    }
+    
+    .section-subtitle {
+        font-size: 1em;
+    }
+    
+    /* Page Header */
+    .page-header {
+        padding: 60px 15px 40px;
+    }
+    
+    .breadcrumb {
+        font-size: 0.95em;
+    }
+    
+    /* Lab Description */
+    .lab-description h3 {
+        font-size: 1.6em;
+    }
+    
+    .lab-description p {
+        font-size: 1em;
+    }
+    
+    /* Module Section */
+    .module-section {
+        padding: 60px 15px;
+    }
+    
+    .module-card {
+        padding: 30px 20px;
+    }
+    
+    .module-card h4 {
+        font-size: 1.3em;
+    }
+    
+    /* Vision & Mission */
+    .vision-mission-section {
+        padding: 60px 15px;
+    }
+    
+    .vm-card {
+        padding: 30px 20px;
+    }
+    
+    .vm-title {
+        font-size: 1.8em;
+    }
+    
+    .vm-subtitle {
+        font-size: 1.1em;
+    }
+    
+    /* Activity Section */
+    .activity-grid {
+        gap: 30px;
+    }
+    
+    .activity-image-horizontal {
+        min-height: 200px;
+    }
+    
+    .activity-content-horizontal {
+        padding: 25px 20px;
+    }
+    
+    .activity-content-horizontal h3 {
+        font-size: 1.5em;
+    }
+    
+    .activity-content-horizontal p {
+        font-size: 0.95em;
+    }
+    
+    /* Module Detail */
+    .module-image-header {
+        height: 250px;
+    }
+    
+    .module-overlay {
+        padding: 30px 20px;
+    }
+    
+    .module-overlay h2 {
+        font-size: 2em;
+    }
+    
+    .module-subtitle {
+        font-size: 1.1em;
+    }
+    
+    .module-content-box {
+        padding: 30px 20px;
+    }
+    
+    .module-description p {
+        font-size: 1em;
+        line-height: 1.7;
+    }
+    
+    /* Video Section */
+    .video-section-premium {
+        padding: 25px 15px;
+    }
+    
+    .video-icon-large {
+        width: 80px;
+        height: 80px;
+        font-size: 3em;
+    }
+    
+    .video-info h5 {
+        font-size: 1.4em;
+    }
+    
+    .video-info p {
+        font-size: 1em;
+    }
+    
+    .btn-video-large {
+        padding: 15px 30px;
+        font-size: 1em;
+    }
+    
+    /* Teams */
+    .filter-buttons {
+        gap: 10px;
+        margin: 30px 0 40px;
+    }
+    
+    .filter-btn {
+        padding: 8px 20px;
+        font-size: 0.9em;
+    }
+    
+    .teams-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 15px;
+    }
+    
+    .team-card {
+        padding: 20px 10px;
+    }
+    
+    .team-avatar {
+        width: 80px;
+        height: 80px;
+        font-size: 2em;
+    }
+    
+    .team-card h4 {
+        font-size: 1em;
+    }
+    
+    .team-role {
+        font-size: 0.85em;
+    }
+    
+    /* Contact Page */
+    .contact-info-card {
+        padding: 25px 20px;
+    }
+    
+    .contact-info-card h3 {
+        font-size: 1.5em;
+    }
+    
+    .contact-intro {
+        font-size: 0.95em;
+    }
+    
+    .info-item strong {
+        font-size: 1em;
+    }
+    
+    .map-container {
+        height: 250px;
+    }
+    
+    .contact-form-box-right {
+        padding: 25px 20px;
+    }
+    
+    .form-input,
+    .form-textarea {
+        padding: 12px 15px;
+        font-size: 0.95em;
+    }
+    
+    .btn-send-message {
+        padding: 12px 40px;
+        font-size: 0.95em;
+    }
+    
+    /* Recruitment Status */
+    .recruitment-status {
+        padding: 20px;
+    }
+    
+    .recruitment-status h4 {
+        font-size: 1.1em;
+    }
+    
+    .status-badge {
+        padding: 6px 20px;
+        font-size: 0.85em;
+    }
+    
+    /* Social Media */
+    .social-media-section {
+        padding: 40px 15px;
+    }
+    
+    .social-media-section h3 {
+        font-size: 1.6em;
+    }
+    
+    .social-btn {
+        width: 90%;
+        font-size: 0.95em;
+        padding: 10px 20px;
+    }
+    
+    .social-icon {
+        font-size: 1.2em;
+    }
+}
+
+/* ============================================
+   VERY SMALL MOBILE (Max-width: 360px)
+   ============================================ */
+@media (max-width: 360px) {
+    .welcome-title {
+        font-size: 1.5em;
+    }
+    
+    .excellent-tag {
+        font-size: 1.1em;
+    }
+    
+    .section-title {
+        font-size: 1.5em;
+    }
+    
+    .module-overlay h2 {
+        font-size: 1.8em;
+    }
+    
+    .vm-title {
+        font-size: 1.6em;
+    }
+    
+    .teams-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
+   LANDSCAPE ORIENTATION (Mobile)
+   ============================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero-welcome {
+        padding: 40px 20px;
+    }
+    
+    .welcome-title {
+        font-size: 1.8em;
+    }
+    
+    .excellent-tag {
+        font-size: 1.3em;
+    }
+    
+    .page-header {
+        padding: 40px 20px 30px;
+    }
+    
+    .module-image-header {
+        height: 350px;
+    }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+    header,
+    .hamburger,
+    .social-media-section,
+    .filter-buttons,
+    .btn-options,
+    .btn-view-all,
+    .btn-video-large {
+        display: none !important;
+    }
+    
+    .page-section {
+        margin-top: 0;
+        page-break-inside: avoid;
+    }
+    
+    .module-card,
+    .team-card,
+    .vm-card,
+    .activity-card-horizontal {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    
+    a {
+        text-decoration: underline;
+        color: #000;
+    }
+    
+    a[href]:after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #666;
+    }
+}

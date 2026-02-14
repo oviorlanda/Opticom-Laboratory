@@ -1,0 +1,257 @@
+/* ============================================
+   ANIMATIONS.CSS — Keyframes & Animation Classes
+   ============================================ */
+
+
+/* --- Gradient Shift --- */
+@keyframes gradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+/* --- Page Loader --- */
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-blue);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.page-loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.page-loader p {
+    color: var(--white);
+    margin-top: 20px;
+    font-size: 1.2em;
+    font-weight: 600;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-top: 5px solid var(--white);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.5; }
+}
+
+
+/* --- Animated Background Shapes --- */
+.hero-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.shape {
+    position: absolute;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.shape-1 {
+    width: 400px;
+    height: 400px;
+    top: -150px;
+    left: -100px;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    animation: morph 20s ease-in-out infinite, float 20s ease-in-out infinite;
+}
+
+.shape-2 {
+    width: 300px;
+    height: 300px;
+    top: 40%;
+    right: -100px;
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    animation: morph 18s ease-in-out infinite reverse, float 15s ease-in-out infinite reverse;
+}
+
+.shape-3 {
+    width: 250px;
+    height: 250px;
+    bottom: -80px;
+    left: 25%;
+    border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%;
+    animation: morph 22s ease-in-out infinite, float 18s ease-in-out infinite;
+}
+
+.shape-4 {
+    width: 350px;
+    height: 350px;
+    top: 10%;
+    right: 15%;
+    border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%;
+    animation: morph 16s ease-in-out infinite reverse, float 22s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25%       { transform: translate(40px, 40px) rotate(90deg); }
+    50%       { transform: translate(-30px, 60px) rotate(180deg); }
+    75%       { transform: translate(50px, -40px) rotate(270deg); }
+}
+
+@keyframes morph {
+    0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+    34%       { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+    67%       { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; }
+}
+
+
+/* --- Typing Animation --- */
+.typing-text {
+    display: inline-block;
+    overflow: hidden;
+    border-right: 3px solid transparent;
+    white-space: nowrap;
+    max-width: 0;
+    animation: typing 3s steps(22) 1s forwards, blink 0.75s step-end infinite;
+}
+
+.typing-cursor {
+    animation: blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { max-width: 0; }
+    to   { max-width: 100%; }
+}
+
+@keyframes blink {
+    0%, 50%   { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+
+/* --- Fade In Up --- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.welcome-title {
+    animation: fadeInUp 1s ease;
+}
+
+.welcome-desc {
+    opacity: 0;
+    animation: fadeInUp 1s ease 3.5s forwards;
+}
+
+
+/* --- Video Icon Float --- */
+.video-icon-large {
+    animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-10px); }
+}
+
+
+/* --- Shimmer (for buttons) --- */
+@keyframes shimmer {
+    0%   { left: -100%; }
+    100% { left: 100%; }
+}
+
+
+/* --- Geometric Pattern Overlay --- */
+.hero-welcome::before,
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(30deg,  rgba(255, 255, 255, 0.05) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.05) 87.5%),
+        linear-gradient(150deg, rgba(255, 255, 255, 0.05) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.05) 87.5%);
+    background-size: 80px 140px;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+
+/* --- Wave Shape (bottom) --- */
+.hero-welcome::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: var(--white);
+    clip-path: polygon(0 50%, 10% 40%, 20% 50%, 30% 40%, 40% 50%, 50% 40%, 60% 50%, 70% 40%, 80% 50%, 90% 40%, 100% 50%, 100% 100%, 0 100%);
+}
+
+.page-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: var(--bg-light);
+    clip-path: polygon(0 40%, 10% 30%, 20% 40%, 30% 30%, 40% 40%, 50% 30%, 60% 40%, 70% 30%, 80% 40%, 90% 30%, 100% 40%, 100% 100%, 0 100%);
+}
+
+
+/* --- Scroll Animations --- */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* --- Hover Scale --- */
+.hover-scale {
+    transition: transform var(--transition-normal);
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}

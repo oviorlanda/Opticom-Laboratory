@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Power Budget Calculator</title>
+    
+    <style>
+        /* ============================================ */
+        /* GLOBAL RESET */
+        /* ============================================ */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f0f4ff;
+            min-height: 100vh;
+        }
+
+        /* ============================================ */
+        /* PAGE HEADER */
+        /* ============================================ */
+        .page-header {
+            background: linear-gradient(135deg, #0052CC 0%, #0099FF 100%);
+            padding: 50px 20px 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Background Shapes */
+        .hero-shapes {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.12;
+        }
+
+        .shape-1 {
+            width: 250px;
+            height: 250px;
+            background: white;
+            top: -60px;
+            right: -40px;
+        }
+
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            background: white;
+            bottom: -50px;
+            left: 10%;
+        }
+
+        .shape-3 {
+            width: 80px;
+            height: 80px;
+            background: white;
+            top: 20px;
+            left: 30%;
+        }
+
+        .shape-4 {
+            width: 180px;
+            height: 180px;
+            background: white;
+            bottom: -60px;
+            right: 25%;
+        }
+
+        /* Header Content */
+        .page-header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            font-size: 30px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .breadcrumb {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .breadcrumb-link {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .breadcrumb-link:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* ============================================ */
+        /* CALCULATOR WRAPPER */
+        /* ============================================ */
+        .lpb-wrapper {
+            max-width: 780px;
+            margin: -25px auto 40px;
+            position: relative;
+            z-index: 2;
+            padding: 0 20px;
+        }
+
+        /* ============================================ */
+        /* CALCULATOR CARD */
+        /* ============================================ */
+        .lpb-card {
+            background: white;
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 6px 28px rgba(0, 0, 0, 0.08);
+            border: 2px solid #f0f0f0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        /* Left Side - Inputs */
+        .lpb-left {
+            /* Input section */
+        }
+
+        /* Right Side - Results (Sticky) */
+        .lpb-right {
+            position: sticky;
+            top: 20px;
+        }
+
+        /* ============================================ */
+        /* INPUT SECTIONS */
+        /* ============================================ */
+        .lpb-section {
+            margin-bottom: 16px;
+        }
+
+        .lpb-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .lpb-section-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: #0066FF;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        /* Input Rows */
+        .lpb-input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        /* Input Groups */
+        .lpb-input-group {
+            position: relative;
+        }
+
+        .lpb-input-group label {
+            display: block;
+            font-size: 10px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .lpb-hint {
+            font-size: 9px;
+            color: #999;
+            font-weight: 400;
+        }
+
+        .lpb-input-group input {
+            width: 100%;
+            padding: 9px 12px;
+            border: 2px solid #E8EFFE;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #0066FF;
+            background: #F8FAFF;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+
+        .lpb-input-group input:focus {
+            border-color: #0066FF;
+        }
+
+        /* Full Width Input */
+        .lpb-input-full {
+            grid-column: 1 / -1;
+        }
+
+        /* ============================================ */
+        /* BUTTONS */
+        /* ============================================ */
+        .lpb-btn-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .lpb-btn-calc {
+            padding: 11px 18px;
+            background: linear-gradient(135deg, #0066FF, #00AAFF);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.9em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lpb-btn-calc:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 14px rgba(0, 102, 255, 0.3);
+        }
+
+        .lpb-btn-reset {
+            padding: 11px 18px;
+            background: #F5F5F5;
+            color: #666;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.9em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lpb-btn-reset:hover {
+            background: #EBEBEB;
+        }
+
+        /* ============================================ */
+        /* FORMULA BOX */
+        /* ============================================ */
+        .lpb-formula-box {
+            background: #F0F5FF;
+            border: 1px solid #D0E2FF;
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-top: 16px;
+            font-size: 10px;
+            color: #444;
+            text-align: center;
+        }
+
+        .lpb-formula {
+            font-weight: 700;
+            color: #0066FF;
+            font-size: 10px;
+        }
+
+        /* ============================================ */
+        /* RESULTS BOX */
+        /* ============================================ */
+        .lpb-results-box {
+            background: linear-gradient(135deg, #0066FF 0%, #00AAFF 100%);
+            border-radius: 12px;
+            padding: 14px;
+            color: white;
+        }
+
+        .lpb-results-title {
+            font-size: 10px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .lpb-result-item {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 8px 10px;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .lpb-result-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .lpb-result-label {
+            font-size: 9px;
+            margin-bottom: 3px;
+            opacity: 0.85;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .lpb-result-value {
+            font-size: 15px;
+            font-weight: 800;
+            color: white;
+        }
+
+        /* ============================================ */
+        /* RESPONSIVE DESIGN */
+        /* ============================================ */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 24px;
+            }
+
+            .lpb-wrapper {
+                max-width: 100%;
+            }
+
+            .lpb-card {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .lpb-right {
+                position: static;
+            }
+
+            .lpb-input-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================ -->
+<!-- PAGE HEADER -->
+<!-- ============================================ -->
+<div class="page-header">
+    <!-- Animated Background Shapes -->
+    <div class="hero-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+    </div>
+    
+    <div class="container">
+        <h2 class="section-title">Link Power Budget Calculator</h2>
+        <div class="breadcrumb">
+            <a href="#" class="breadcrumb-link" data-page="Opticaltoolbox">Optical Toolbox</a> &rsaquo; Power Budget
+        </div>
+    </div>
+</div>
+
+<!-- ============================================ -->
+<!-- CALCULATOR CONTENT -->
+<!-- ============================================ -->
+<div class="lpb-wrapper">
+    <div class="lpb-card">
+
+        <!-- LEFT SIDE: Input Parameters -->
+        <div class="lpb-left">
+            
+            <!-- Transmitter & Receiver Section -->
+            <div class="lpb-section">
+                <div class="lpb-section-title">📡 Transmitter & Receiver</div>
+                <div class="lpb-input-row">
+                    <div class="lpb-input-group">
+                        <label>Tx Power (dBm)</label>
+                        <input type="number" id="lpb-tx-power" value="3" step="0.1">
+                    </div>
+                    <div class="lpb-input-group">
+                        <label>Rx Sensitivity (dBm)</label>
+                        <input type="number" id="lpb-rx-sensitivity" value="-28" step="0.1">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fiber Parameters Section -->
+            <div class="lpb-section">
+                <div class="lpb-section-title">📏 Fiber Parameters</div>
+                <div class="lpb-input-row">
+                    <div class="lpb-input-group">
+                        <label>Fiber Length (km)</label>
+                        <input type="number" id="lpb-fiber-length" value="10" step="0.1" min="0">
+                    </div>
+                    <div class="lpb-input-group">
+                        <label>Loss/km (dB/km)</label>
+                        <input type="number" id="lpb-loss-per-km" value="0.35" step="0.01" min="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Losses Section -->
+            <div class="lpb-section">
+                <div class="lpb-section-title">🔌 Additional Losses</div>
+                <div class="lpb-input-row">
+                    <div class="lpb-input-group">
+                        <label>Connector Loss (dB)</label>
+                        <input type="number" id="lpb-connector-loss" value="0.5" step="0.1" min="0">
+                    </div>
+                    <div class="lpb-input-group">
+                        <label>Splice Loss (dB)</label>
+                        <input type="number" id="lpb-splice-loss" value="0.1" step="0.1" min="0">
+                    </div>
+                </div>
+                <div class="lpb-input-row">
+                    <div class="lpb-input-group lpb-input-full">
+                        <label>Splitter Loss (dB) <span class="lpb-hint">e.g., 17.5 for 1:32</span></label>
+                        <input type="number" id="lpb-splitter-loss" value="0" step="0.1" min="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="lpb-btn-row">
+                <button class="lpb-btn-calc" id="lpb-btn-calculate">Calculate</button>
+                <button class="lpb-btn-reset" id="lpb-btn-reset">Reset</button>
+            </div>
+
+            <!-- Formula Display -->
+            <div class="lpb-formula-box">
+                💡 <span class="lpb-formula">Loss = (Length × Loss/km) + Connector + Splice + Splitter</span>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE: Results Display -->
+        <div class="lpb-right">
+            <div class="lpb-results-box" id="lpb-results">
+                <div class="lpb-results-title">📊 RESULTS</div>
+                
+                <!-- Total Loss -->
+                <div class="lpb-result-item">
+                    <div class="lpb-result-label">Total Loss</div>
+                    <div class="lpb-result-value" id="lpb-total-loss">-</div>
+                </div>
+                
+                <!-- Rx Power -->
+                <div class="lpb-result-item">
+                    <div class="lpb-result-label">Rx Power</div>
+                    <div class="lpb-result-value" id="lpb-rx-power">-</div>
+                </div>
+                
+                <!-- Link Margin -->
+                <div class="lpb-result-item">
+                    <div class="lpb-result-label">Link Margin</div>
+                    <div class="lpb-result-value" id="lpb-link-margin">-</div>
+                </div>
+                
+                <!-- Power Budget -->
+                <div class="lpb-result-item">
+                    <div class="lpb-result-label">Power Budget</div>
+                    <div class="lpb-result-value" id="lpb-power-budget">-</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ============================================ -->
+<!-- JAVASCRIPT -->
+<!-- ============================================ -->
+<script>
+console.log('🔧 Link Power Budget Calculator loaded');
+
+// Initialize calculator on DOM ready
+document.addEventListener('DOMContentLoaded', function() {
+    initCalculator();
+});
+
+// Initialize calculator
+function initCalculator() {
+    // Setup event listeners
+    document.getElementById('lpb-btn-calculate').addEventListener('click', calculateLPB);
+    document.getElementById('lpb-btn-reset').addEventListener('click', resetLPB);
+    
+    // Setup breadcrumb navigation
+    setupBreadcrumbNavigation();
+    
+    console.log('✅ Calculator initialized');
+}
+
+// Calculate Link Power Budget
+function calculateLPB() {
+    // Get all input values
+    const txPower = parseFloat(document.getElementById('lpb-tx-power').value) || 0;
+    const rxSensitivity = parseFloat(document.getElementById('lpb-rx-sensitivity').value) || 0;
+    const fiberLength = parseFloat(document.getElementById('lpb-fiber-length').value) || 0;
+    const lossPerKm = parseFloat(document.getElementById('lpb-loss-per-km').value) || 0;
+    const connectorLoss = parseFloat(document.getElementById('lpb-connector-loss').value) || 0;
+    const spliceLoss = parseFloat(document.getElementById('lpb-splice-loss').value) || 0;
+    const splitterLoss = parseFloat(document.getElementById('lpb-splitter-loss').value) || 0;
+
+    // Calculate Total Loss
+    const fiberLoss = fiberLength * lossPerKm;
+    const totalLoss = fiberLoss + connectorLoss + spliceLoss + splitterLoss;
+
+    // Calculate Rx Power
+    const rxPower = txPower - totalLoss;
+
+    // Calculate Link Margin
+    const linkMargin = rxPower - rxSensitivity;
+
+    // Calculate Power Budget
+    const powerBudget = txPower - rxSensitivity;
+
+    // Display results with clean formatting
+    displayResults(totalLoss, rxPower, linkMargin, powerBudget);
+    
+    console.log('📊 Calculation complete:', {
+        totalLoss: totalLoss.toFixed(2),
+        rxPower: rxPower.toFixed(2),
+        linkMargin: linkMargin.toFixed(2),
+        powerBudget: powerBudget.toFixed(2)
+    });
+}
+
+// Display calculation results
+function displayResults(totalLoss, rxPower, linkMargin, powerBudget) {
+    document.getElementById('lpb-total-loss').textContent = parseFloat(totalLoss.toFixed(2)) + ' dB';
+    document.getElementById('lpb-rx-power').textContent = parseFloat(rxPower.toFixed(2)) + ' dBm';
+    document.getElementById('lpb-link-margin').textContent = parseFloat(linkMargin.toFixed(2)) + ' dB';
+    document.getElementById('lpb-power-budget').textContent = parseFloat(powerBudget.toFixed(2)) + ' dB';
+}
+
+// Reset calculator to default values
+function resetLPB() {
+    // Reset input values to defaults
+    document.getElementById('lpb-tx-power').value = '3';
+    document.getElementById('lpb-rx-sensitivity').value = '-28';
+    document.getElementById('lpb-fiber-length').value = '10';
+    document.getElementById('lpb-loss-per-km').value = '0.35';
+    document.getElementById('lpb-connector-loss').value = '0.5';
+    document.getElementById('lpb-splice-loss').value = '0.1';
+    document.getElementById('lpb-splitter-loss').value = '0';
+    
+    // Reset results display
+    resetResultsDisplay();
+    
+    console.log('🔄 Calculator reset to default values');
+}
+
+// Reset results display to default state
+function resetResultsDisplay() {
+    document.getElementById('lpb-total-loss').textContent = '-';
+    document.getElementById('lpb-rx-power').textContent = '-';
+    document.getElementById('lpb-link-margin').textContent = '-';
+    document.getElementById('lpb-power-budget').textContent = '-';
+}
+
+// Setup breadcrumb navigation
+function setupBreadcrumbNavigation() {
+    const breadcrumbLink = document.querySelector('[data-page="Opticaltoolbox"]');
+    
+    if (breadcrumbLink) {
+        breadcrumbLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'Opticaltoolbox.html';
+        });
+    }
+}
+</script>
+
+</body>
+</html>

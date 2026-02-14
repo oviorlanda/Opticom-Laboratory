@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Opticom Laboratory - Excellent Laboratory in Optical Communication System at Telkom University">
+    <title>OPTICOM LABORATORY - Excellent Laboratory</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/OCL LOGO.png">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- ✅ SOLUSI: Gunakan Font Awesome lokal atau hapus jika tidak ada -->
+    <!-- Uncomment baris di bawah jika sudah download Font Awesome ke folder css/ -->
+    <!-- <link rel="stylesheet" href="css/fontawesome/css/all.min.css"> -->
+    
+    <!-- ✅ ALTERNATIF: Gunakan Unicode symbols sebagai pengganti icon -->
+    <style>
+        /* Fallback untuk icon tanpa Font Awesome */
+        .fa, .fas, .far, .fab {
+            font-style: normal;
+            display: inline-block;
+        }
+        .fa-book-open::before { content: "📖"; }
+        .fa-download::before { content: "⬇️"; }
+        .fa-clock::before { content: "🕐"; }
+        .fa-lightbulb::before { content: "💡"; }
+        .fa-network-wired::before { content: "🔗"; }
+        .fa-signal::before { content: "📶"; }
+        .fa-broadcast-tower::before { content: "📡"; }
+        .fa-satellite-dish::before { content: "📡"; }
+        .fa-project-diagram::before { content: "🔄"; }
+        .fa-wifi::before { content: "📶"; }
+        .fa-eye::before { content: "👁️"; }
+        .fa-car::before { content: "🚗"; }
+        .fa-bell::before { content: "🔔"; }
+        .fa-times::before { content: "✖"; }
+        .fa-check-circle::before { content: "✅"; }
+        .fa-file-pdf::before { content: "📄"; }
+        .fa-hourglass-half::before { content: "⏳"; }
+        .fa-bars::before { content: "☰"; }
+        .fa-envelope::before { content: "✉️"; }
+        .fa-phone::before { content: "📞"; }
+        .fa-map-marker-alt::before { content: "📍"; }
+    </style>
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- LOADING SPINNER -->
+    <!-- ============================================ -->
+    <div id="loader-container" class="page-loader">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER / NAVIGATION -->
+    <!-- ============================================ -->
+    <div id="header-container">
+        <header>
+            <nav class="navbar">
+                <div class="nav-container">
+                    <div class="logo-section">
+                        <img src="assets/OCL LOGO.png" alt="Opticom Laboratory Logo" class="nav-logo">
+                        <div class="logo">
+                            <h1>OPTICOM LABORATORY</h1>
+                            <p class="tagline">Excellent Laboratory</p>
+                        </div>
+                    </div>
+                    <ul class="nav-menu">
+                        <li><a href="#about" class="nav-link active" data-page="about">About Us</a></li>
+                        <li><a href="#teams" class="nav-link" data-page="teams">Our Teams</a></li>
+                        <li><a href="#activity" class="nav-link" data-page="activities">Our Activity</a></li>
+                        <li><a href="#contact" class="nav-link" data-page="contact">Informations</a></li>
+                    </ul>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- INFO BANNER (If opened without server) -->
+    <!-- ============================================ -->
+    <div id="cors-warning" style="display:none; background: #ff4444; color: white; padding: 15px; text-align: center; position: fixed; top: 70px; left: 0; right: 0; z-index: 999;">
+        ⚠️ <strong>IMPORTANT:</strong> Please open this website using a web server (Live Server, Python http.server, etc). Direct file:// access may not work properly!
+    </div>
+
+    <!-- ============================================ -->
+    <!-- MAIN CONTENT -->
+    <!-- ============================================ -->
+    <main id="page-container">
+        <section id="about-section" class="page-section active"></section>
+        <section id="modules-section" class="page-section"></section>
+        <section id="module1-section" class="page-section"></section>
+        <section id="module2-section" class="page-section"></section>
+        <section id="module3-section" class="page-section"></section>
+        <section id="teams-section" class="page-section"></section>
+        <section id="activities-section" class="page-section"></section>
+        <section id="contact-section" class="page-section"></section>
+        <section id="Opticaltoolbox-section" class="page-section"></section>
+        <section id="NACalculator-section" class="page-section"></section>
+        <section id="komplain-section" class="page-section"></section>
+        <section id="tatatertib-section" class="page-section"></section>
+        <section id="tugaspendahuluan-section" class="page-section"></section>
+        <section id="videopembelajaran-section" class="page-section"></section>
+        <section id="jadwal-section" class="page-section"></section>
+        <section id="VDCalculator-section" class="page-section"></section>
+        <section id="UCCalculator-section" class="page-section"></section>
+        <section id="LPBCalculator-section" class="page-section"></section>
+    </main>
+
+    <!-- ============================================ -->
+    <!-- FOOTER -->
+    <!-- ============================================ -->
+    <div id="footer-container"></div>
+
+    <!-- ============================================ -->
+    <!-- JavaScript Files -->
+    <!-- ============================================ -->
+    <script src="js/config.js"></script>
+    
+    <script>
+    // Detect if running on file:// protocol
+    if (window.location.protocol === 'file:') {
+        const warning = document.getElementById('cors-warning');
+        if (warning) {
+            warning.style.display = 'block';
+            console.warn('⚠️ Running on file:// protocol. Please use a web server for full functionality.');
+        }
+    }
+    </script>
+    
+    <script src="js/main.js"></script>
+    <script src="js/interactions.js"></script>
+    <script src="js/calculator.js"></script>
+
+    <script>
+        console.log('%c🔬 OPTICOM LABORATORY', 'color: #0000FF; font-size: 24px; font-weight: bold;');
+        console.log('%cExcellent Laboratory - Fiber Optics Transmission', 'color: #4169E1; font-size: 14px;');
+        console.log('%cWebsite Version 2.0 - Modular Architecture', 'color: #00AA00; font-size: 12px;');
+        console.log('%c📋 Menu integrated in About page', 'color: #666; font-size: 12px;');
+        console.log('%c✅ Using emoji icons as fallback (no external CDN)', 'color: #00AA00; font-size: 11px;');
+    </script>
+</body>
+</html>

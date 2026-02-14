@@ -1,0 +1,409 @@
+<!-- ============================================ -->
+<!-- TUGAS PENDAHULUAN PAGE - COMPACT VERSION -->
+<!-- Halaman untuk melihat dan mencari tugas pendahuluan -->
+<!-- ============================================ -->
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="hero-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+    </div>
+    
+    <div class="container">
+        <h2 class="section-title">Tugas Pendahuluan</h2>
+        <div class="breadcrumb">
+            <a href="#" class="breadcrumb-link" data-page="about">Home</a> > Tugas Pendahuluan
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container" style="padding: 24px 20px;">
+    
+    <!-- Info Box -->
+    <div class="info-box" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-left: 3px solid #3b82f6; padding: 12px 16px; border-radius: 8px; margin-bottom: 24px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-info-circle" style="color: #3b82f6; font-size: 18px;"></i>
+            <p style="color: #1e40af; margin: 0; font-size: 0.9rem; line-height: 1.5;">
+                Soal TP tersedia setiap <strong>Sabtu pukul 17:00 WIB</strong>. Periksa rutin, karena perubahan soal dapat terjadi sewaktu-waktu.
+            </p>
+        </div>
+    </div>
+
+    <!-- Search Box -->
+    <div class="search-container" style="max-width: 500px; margin: 0 auto 40px;">
+        <div style="position: relative;">
+            <input 
+                type="text" 
+                id="tp-search-input"
+                placeholder="Cari kode atau nama modul..." 
+                style="width: 100%; padding: 12px 45px 12px 16px; border: 2px solid #e2e8f0; border-radius: 25px; font-size: 0.95rem; transition: all 0.3s ease; background: white;">
+            <button 
+                id="tp-search-btn"
+                style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                <i class="fas fa-search" style="font-size: 14px;"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" style="text-align: center; padding: 50px 20px;">
+        <!-- Icon -->
+        <div style="margin-bottom: 20px;">
+            <svg width="90" height="90" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin: 0 auto;">
+                <!-- Folder Icon -->
+                <rect x="20" y="35" width="80" height="60" rx="8" fill="#e2e8f0"/>
+                <rect x="20" y="30" width="35" height="10" rx="3" fill="#cbd5e1"/>
+                <path d="M25 45 L35 55 M35 45 L25 55" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                <path d="M85 45 L95 55 M95 45 L85 55" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                <line x1="50" y1="65" x2="70" y2="65" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+        </div>
+
+        <!-- Title -->
+        <h3 style="font-size: 1.4rem; color: #1e293b; margin-bottom: 12px; font-weight: 700;">
+            Belum Ada Tugas Pendahuluan
+        </h3>
+
+        <!-- Description -->
+        <p style="color: #64748b; font-size: 0.95rem; line-height: 1.6; max-width: 450px; margin: 0 auto 24px;">
+            Silakan periksa kembali secara berkala. Jika hari ini tidak ada TP, selamat, kamu bisa rehat sejenak!
+        </p>
+
+        <!-- Action Button -->
+        <button 
+            onclick="location.reload()" 
+            style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; border: none; padding: 10px 24px; border-radius: 25px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 3px 10px rgba(59, 130, 246, 0.3);">
+            <i class="fas fa-sync-alt" style="margin-right: 6px; font-size: 13px;"></i>
+            Refresh Halaman
+        </button>
+    </div>
+
+    <!-- Task List Container (Hidden initially) -->
+    <div id="task-list-container" style="display: none;">
+        <div class="task-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
+            <!-- Task cards will be dynamically inserted here -->
+        </div>
+    </div>
+
+</div>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Styles -->
+<style>
+/* Search Input Focus Effect */
+#tp-search-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Search Button Hover */
+#tp-search-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 3px 10px rgba(59, 130, 246, 0.4);
+}
+
+/* Empty State Animation */
+.empty-state {
+    animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Task Card Styles (for future use) */
+.task-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.task-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    border-color: #3b82f6;
+}
+
+.task-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.task-badge {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.task-title {
+    font-size: 1.05rem;
+    color: #1e293b;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.task-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #64748b;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.task-meta i {
+    color: #3b82f6;
+    font-size: 13px;
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-download,
+.btn-view {
+    flex: 1;
+    padding: 10px 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-download {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+}
+
+.btn-download:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(59, 130, 246, 0.4);
+}
+
+.btn-view {
+    background: white;
+    border: 2px solid #3b82f6;
+    color: #3b82f6;
+}
+
+.btn-view:hover {
+    background: #eff6ff;
+}
+
+.btn-download i,
+.btn-view i {
+    font-size: 13px;
+    margin-right: 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 16px !important;
+    }
+    
+    .info-box {
+        padding: 10px 14px !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .info-box p {
+        font-size: 0.85rem !important;
+    }
+    
+    .info-box i {
+        font-size: 16px !important;
+    }
+    
+    .search-container {
+        margin-bottom: 32px !important;
+    }
+    
+    #tp-search-input {
+        padding: 10px 42px 10px 14px !important;
+        font-size: 0.9rem !important;
+    }
+    
+    #tp-search-btn {
+        width: 32px !important;
+        height: 32px !important;
+    }
+    
+    .empty-state {
+        padding: 40px 16px !important;
+    }
+    
+    .empty-state svg {
+        width: 75px !important;
+        height: 75px !important;
+    }
+    
+    .empty-state h3 {
+        font-size: 1.2rem !important;
+    }
+    
+    .empty-state p {
+        font-size: 0.9rem !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .empty-state button {
+        padding: 9px 20px !important;
+        font-size: 0.85rem !important;
+    }
+    
+    .task-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+    
+    .task-card {
+        padding: 14px !important;
+    }
+    
+    .task-title {
+        font-size: 1rem !important;
+    }
+    
+    .task-meta {
+        font-size: 0.8rem !important;
+        gap: 10px !important;
+    }
+    
+    .btn-download,
+    .btn-view {
+        padding: 9px 10px !important;
+        font-size: 0.8rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .task-badge {
+        font-size: 0.75rem !important;
+        padding: 3px 10px !important;
+    }
+    
+    .task-card-header span:last-child {
+        font-size: 0.8rem !important;
+    }
+}
+</style>
+
+<!-- JavaScript -->
+<script>
+(function() {
+    'use strict';
+    
+    console.log('📝 Tugas Pendahuluan page loaded (Compact Version)');
+    
+    // Search functionality
+    const searchInput = document.getElementById('tp-search-input');
+    const searchBtn = document.getElementById('tp-search-btn');
+    
+    if (searchInput && searchBtn) {
+        searchBtn.addEventListener('click', function() {
+            const query = searchInput.value.trim();
+            if (query) {
+                console.log('🔍 Searching for:', query);
+                alert('Pencarian untuk: "' + query + '"\n\nFitur pencarian akan aktif ketika ada tugas tersedia.');
+            } else {
+                alert('Mohon masukkan kata kunci pencarian.');
+            }
+        });
+        
+        // Enter key to search
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchBtn.click();
+            }
+        });
+    }
+    
+    // Example: Function to add tasks dynamically (for future use)
+    window.addTask = function(task) {
+        const taskListContainer = document.getElementById('task-list-container');
+        const emptyState = document.querySelector('.empty-state');
+        
+        if (taskListContainer && emptyState) {
+            // Hide empty state
+            emptyState.style.display = 'none';
+            
+            // Show task list
+            taskListContainer.style.display = 'block';
+            
+            // Create task card
+            const taskCard = document.createElement('div');
+            taskCard.className = 'task-card';
+            taskCard.innerHTML = `
+                <div class="task-card-header">
+                    <span class="task-badge">${task.module}</span>
+                    <span style="color: #64748b; font-size: 0.8rem;">${task.date}</span>
+                </div>
+                <h4 class="task-title">${task.title}</h4>
+                <div class="task-meta">
+                    <span><i class="fas fa-clock"></i> ${task.deadline}</span>
+                    <span><i class="fas fa-file-alt"></i> ${task.fileType}</span>
+                </div>
+                <div class="task-actions">
+                    <button class="btn-download" onclick="alert('Download: ${task.title}')">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                    <button class="btn-view" onclick="alert('View: ${task.title}')">
+                        <i class="fas fa-eye"></i> Lihat
+                    </button>
+                </div>
+            `;
+            
+            taskListContainer.querySelector('.task-grid').appendChild(taskCard);
+        }
+    };
+    
+    // Example usage (uncomment to test):
+    // setTimeout(function() {
+    //     addTask({
+    //         module: 'Modul 1',
+    //         date: '06 Feb',
+    //         title: 'Tugas Pendahuluan Fiber Optic Basics',
+    //         deadline: '13 Feb 2026',
+    //         fileType: 'PDF'
+    //     });
+    //     addTask({
+    //         module: 'Modul 2',
+    //         date: '07 Feb',
+    //         title: 'TP Network Security Fundamentals',
+    //         deadline: '14 Feb 2026',
+    //         fileType: 'DOCX'
+    //     });
+    // }, 2000);
+    
+})();
+</script>
