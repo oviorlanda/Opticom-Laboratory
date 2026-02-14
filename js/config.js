@@ -137,7 +137,7 @@ const CONFIG = {
         },
         videopembelajaran: {
             id: 'videopembelajaran-section',
-            file: 'pages/Videopembelajaran.html',
+            file: 'pages/videopembelajaran.html',
             title: 'Video Pembelajaran'
         },
         jadwal: {
@@ -229,3 +229,4 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = CONFIG;
 
 }
+
