@@ -414,7 +414,7 @@ async function initializeApp() {
     console.log('🚀 Initializing OPTICOM LABORATORY...');
     console.log('═══════════════════════════════════════════');
     
-    // Load components
+    // Load components (sequential - order matters)
     console.log('📦 Loading components...');
     await loadComponent('loader', 'loader-container');
     await loadComponent('header', 'header-container');
@@ -422,26 +422,28 @@ async function initializeApp() {
     
     console.log('═══════════════════════════════════════════');
     
-    // Load pages
-    console.log('📄 Loading pages...');
-    await loadPage('about', 'about-section');
-    await loadPage('modules', 'modules-section');
-    await loadPage('module1', 'module1-section');
-    await loadPage('module2', 'module2-section');
-    await loadPage('module3', 'module3-section');
-    await loadPage('teams', 'teams-section');
-    await loadPage('activities', 'activities-section');
-    await loadPage('contact', 'contact-section');
-    await loadPage('Opticaltoolbox', 'Opticaltoolbox-section');
-    await loadPage('NACalculator', 'NACalculator-section');
-    await loadPage('komplain', 'komplain-section');
-    await loadPage('tatatertib', 'tatatertib-section');
-    await loadPage('tugaspendahuluan', 'tugaspendahuluan-section');
-    await loadPage('videopembelajaran', 'videopembelajaran-section');
-    await loadPage('jadwal', 'jadwal-section');
-    await loadPage('VDCalculator', 'VDCalculator-section');
-    await loadPage('UCCalculator', 'UCCalculator-section');
-    await loadPage('LPBCalculator', 'LPBCalculator-section');
+    // Load all pages in PARALLEL for faster loading
+    console.log('📄 Loading pages (parallel)...');
+    await Promise.all([
+        loadPage('about', 'about-section'),
+        loadPage('modules', 'modules-section'),
+        loadPage('module1', 'module1-section'),
+        loadPage('module2', 'module2-section'),
+        loadPage('module3', 'module3-section'),
+        loadPage('teams', 'teams-section'),
+        loadPage('activities', 'activities-section'),
+        loadPage('contact', 'contact-section'),
+        loadPage('Opticaltoolbox', 'Opticaltoolbox-section'),
+        loadPage('NACalculator', 'NACalculator-section'),
+        loadPage('komplain', 'komplain-section'),
+        loadPage('tatatertib', 'tatatertib-section'),
+        loadPage('tugaspendahuluan', 'tugaspendahuluan-section'),
+        loadPage('videopembelajaran', 'videopembelajaran-section'),
+        loadPage('jadwal', 'jadwal-section'),
+        loadPage('VDCalculator', 'VDCalculator-section'),
+        loadPage('UCCalculator', 'UCCalculator-section'),
+        loadPage('LPBCalculator', 'LPBCalculator-section'),
+    ]);
 
     console.log('═══════════════════════════════════════════');
     
